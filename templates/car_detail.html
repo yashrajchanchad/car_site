@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ car.make }} {{ car.model }} Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            height: 100%;
+            transition: transform 0.5s ease;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+            padding: 5%;
+        }
+
+        .card:hover {
+            transform: translateY(-20px);
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            text-align: center;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .specifications h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .specifications ul li {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .specifications h2 {
+                font-size: 1.5rem;
+            }
+
+            .specifications ul li {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">{{ car.make }} {{ car.model }}</h1>
+        <div class="row">
+            <div class="col-md-4 mb-4 d-flex">
+                <div class="card w-100">
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}" class="img-fluid" alt="{{ car.make }} {{ car.model }}">
+                    {% else %}
+                    <div class="text-center p-5">
+                        <p>No Image Available</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6 specifications">
+                <h2>Specifications</h2>
+                <ul class="list-unstyled">
+                    <li><strong>Year:</strong> {{ car.year }}</li>
+                    <li><strong>Price:</strong> ${{ car.price }}</li>
+                    <li><strong>Description:</strong> {{ car.description }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="{% url 'car_list' %}" class="btn btn-primary mt-4">Back to Car List</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
